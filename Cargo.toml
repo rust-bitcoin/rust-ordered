@@ -1,8 +1,17 @@
 [package]
-name = "rust-ordered"
+name = "ordered"
 version = "0.1.0"
+authors = ["Tobin C. Harding <me@tobin.cc>"]
+license = "CC0-1.0"
+repository = "https://github.com/tcharding/rust-ordered/"
+documentation = "https://docs.rs/ordered/"
+description = "A wrapper for adding arbitrary partial/total order to a type"
+categories = ["data-structures"]
+keywords = ["ord", "partialord", "wrapper"]
+readme = "README.md"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+exclude = ["justfile", "rustfmt.toml", "clippy.toml"]
 
 [dependencies]
+
+[features]
