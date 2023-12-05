@@ -5,11 +5,12 @@ authors = ["Tobin C. Harding <me@tobin.cc>"]
 license = "CC0-1.0"
 repository = "https://github.com/tcharding/rust-ordered/"
 documentation = "https://docs.rs/ordered/"
-description = "A wrapper for adding arbitrary partial/total order to a type"
+description = "A wrapper for adding arbitrary partial/total order to a type."
 categories = ["data-structures"]
 keywords = ["ord", "partialord", "wrapper"]
 readme = "README.md"
 edition = "2021"
+rust-version = "1.56.1"
 exclude = ["justfile", "rustfmt.toml", "clippy.toml"]
 
 [dependencies]

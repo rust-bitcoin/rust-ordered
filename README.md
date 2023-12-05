@@ -6,7 +6,7 @@ but for semantic reasons it is nonsensical.
 
 ## Minimum Supported Rust Version (MSRV)
 
-The crate MSRV is Rust v1.63.0
+The crate MSRV is Rust v1.56.1
 
 ## Licensing
 
