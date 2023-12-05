@@ -16,3 +16,6 @@ exclude = ["justfile", "rustfmt.toml", "clippy.toml"]
 [dependencies]
 
 [features]
+
+[[example]]
+name = "docs"
