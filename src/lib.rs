@@ -71,12 +71,12 @@ impl<T> Ordered<T> {
     /// Creates a new wrapped ordered type.
     ///
     /// The inner type is public so this function is never explicitly needed.
-    pub fn new(inner: T) -> Self { Self(inner) }
+    pub const fn new(inner: T) -> Self { Self(inner) }
 
     /// Returns a reference to the inner object.
     ///
     /// We also implement [`core::borrow::Borrow`] so this function is never explicitly needed.
-    pub fn as_inner(&self) -> &T { &self.0 }
+    pub const fn as_inner(&self) -> &T { &self.0 }
 
     /// Returns the inner object.
     ///
