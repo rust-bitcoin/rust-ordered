@@ -1,8 +1,9 @@
 //! Code used in docs, crate level and README.md
 
 use std::cmp::Ordering;
-use std::fmt;
 use std::collections::BTreeMap;
+use std::fmt;
+
 use ordered::{ArbitraryOrd, Ordered};
 
 fn main() {
@@ -33,7 +34,7 @@ enum Foo {
     /// A space foo.
     Space(u32),
     /// A time foo.
-    Time(u32)
+    Time(u32),
 }
 
 impl ArbitraryOrd for Foo {
