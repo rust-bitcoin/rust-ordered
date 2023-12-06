@@ -23,6 +23,10 @@ fn b_tree_map() {
 
     map.insert(Ordered(a), "some interesting value");
     map.insert(Ordered(b), "some other interesting value");
+
+    println!("Looking in map for key: {}", a);
+    let found = map.get(&Ordered::from(a)).expect("failed to look up key");
+    println!("With value: {}", found);
 }
 
 /// A Foo type.
