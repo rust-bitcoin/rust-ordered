@@ -18,4 +18,4 @@ exclude = ["justfile", "rustfmt.toml", "clippy.toml"]
 [features]
 
 [[example]]
-name = "docs"
+name = "point"
