@@ -1,8 +1,9 @@
 //! Code used in docs, crate level and README.md
 
 use std::cmp::Ordering;
-use std::fmt;
 use std::collections::BTreeMap;
+use std::fmt;
+
 use ordered::{ArbitraryOrd, Ordered};
 
 fn main() {
@@ -22,6 +23,10 @@ fn b_tree_map() {
 
     map.insert(Ordered(a), "some interesting value");
     map.insert(Ordered(b), "some other interesting value");
+
+    println!("Looking in map for key: {}", a);
+    let found = map.get(&Ordered::from(a)).expect("failed to look up key");
+    println!("With value: {}", found);
 }
 
 /// A Foo type.
@@ -33,7 +38,7 @@ enum Foo {
     /// A space foo.
     Space(u32),
     /// A time foo.
-    Time(u32)
+    Time(u32),
 }
 
 impl ArbitraryOrd for Foo {
@@ -72,7 +77,7 @@ fn derive_and_access() {
     println!("Or the inner type: {}", adt.p.into_inner());
 }
 
-/// An example strcut that contains a `Foo`.
+/// An example struct that contains a `Foo`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 struct Adt {
     x: u32,
