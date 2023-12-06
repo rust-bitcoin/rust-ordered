@@ -73,7 +73,7 @@ fn derive_and_access() {
     println!("Or the inner type: {}", adt.p.into_inner());
 }
 
-/// An example strcut that contains a `Foo`.
+/// An example struct that contains a `Foo`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 struct Adt {
     x: u32,
