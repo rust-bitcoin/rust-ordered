@@ -3,52 +3,7 @@
 //! Provides a wrapper for types that can technically implement `PartialOrd`/`Ord`
 //! but for semantic reasons it is nonsensical.
 //!
-//! # Examples
-//!
-//! ```
-//! use std::cmp::Ordering;
-//! use std::collections::BTreeMap;
-//! use ordered::{ArbitraryOrd, Ordered};
-//!
-//! /// A Foo type.
-//! ///
-//! /// We do not want users to be able to write `a < b` because it is meaningless
-//! /// to compare the two but we wish to use `Foo`, for example, as a `BTreeMap` key.
-//! #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-//! enum Foo {
-//!     /// A space foo.
-//!     Space(u32),
-//!     /// A time foo.
-//!     Time(u32)
-//! }
-//!
-//! impl ArbitraryOrd for Foo {
-//!     fn arbitrary_cmp(&self, other: &Self) -> Ordering {
-//!         use Foo::*;
-//!         match (self, other) {
-//!             (Space(_), Time(_)) => Ordering::Less,
-//!             (Time(_), Space(_)) => Ordering::Greater,
-//!             (Space(this), Space(that)) => this.cmp(that),
-//!             (Time(this), Time(that)) => this.cmp(that),
-//!         }
-//!     }
-//! }
-//!
-//! let a = Foo::Space(50);
-//! let b = Foo::Time(50);
-//!
-//! let mut map = BTreeMap::new();
-//!
-//! // error[E0277]: the trait bound `Foo: Ord` is not satisfied
-//! // map.insert(a, "some interesting value");
-//!
-//! map.insert(Ordered(a), "some interesting value");
-//! map.insert(Ordered(b), "some other interesting value");
-//!
-//! println!("Looking in map for key: {}", a);
-//! let found = map.get(&Ordered::from(a)).expect("failed to look up key");
-//! println!("With value: {}", found);
-//! ```
+//! For examples see the docs on [`Ordered`] or the code in `examples/point.rs`.
 
 #![no_std]
 // Experimental features we need.
@@ -71,6 +26,42 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 }
 
 /// A wrapper type that implements `PartialOrd` and `Ord`.
+///
+/// # Examples
+///
+/// ```
+/// use core::{cmp::Ordering, fmt};
+/// use ordered::{ArbitraryOrd, Ordered};
+///
+/// /// A point in 2D space.
+/// ///
+/// /// We do not want users to be able to write `a < b` because it is not well defined.
+/// #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+/// struct Point {
+///     x: u32,
+///     y: u32,
+/// }
+///
+/// impl ArbitraryOrd for Point {
+///     fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+///         // Just use whatever order tuple cmp gives us.
+///         (self.x, self.y).cmp(&(other.x, other.y))
+///     }
+/// }
+///
+/// impl fmt::Display for Point {
+///     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+///         write!(f, "({}, {})", self.x, self.y)
+///     }
+/// }
+///
+/// let point = Point { x: 0, y: 1 };
+/// let ordered = Ordered(point);
+///
+/// println!("We can explicitly deref (*ordered): {}", *ordered);
+/// println!("Or use deref coercion (ordered): {}", ordered);
+/// println!("Or we can use borrow (&ordered): {}", &ordered);
+/// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct Ordered<T>(pub T);
 
