@@ -92,6 +92,12 @@ impl<T> Ordered<T> {
     }
 }
 
+impl<T: ArbitraryOrd> ArbitraryOrd for &T {
+    fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+        (*self).arbitrary_cmp(other)
+    }
+}
+
 impl<T: ArbitraryOrd> PartialOrd for Ordered<T> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
 }
