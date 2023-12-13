@@ -108,6 +108,14 @@ impl<T> From<T> for Ordered<T> {
     fn from(inner: T) -> Self { Self(inner) }
 }
 
+impl<T> Borrow<T> for Ordered<T> {
+    fn borrow(&self) -> &T { &self.0 }
+}
+
+impl<T> BorrowMut<T> for Ordered<T> {
+    fn borrow_mut(&mut self) -> &mut T { &mut self.0 }
+}
+
 impl<T> Deref for Ordered<T> {
     type Target = T;
 
@@ -116,12 +124,4 @@ impl<T> Deref for Ordered<T> {
 
 impl<T> DerefMut for Ordered<T> {
     fn deref_mut(&mut self) -> &mut T { &mut self.0 }
-}
-
-impl<T> Borrow<T> for Ordered<T> {
-    fn borrow(&self) -> &T { &self.0 }
-}
-
-impl<T> BorrowMut<T> for Ordered<T> {
-    fn borrow_mut(&mut self) -> &mut T { &mut self.0 }
 }
