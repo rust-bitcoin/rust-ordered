@@ -108,6 +108,14 @@ impl<T> From<T> for Ordered<T> {
     fn from(inner: T) -> Self { Self(inner) }
 }
 
+impl<T> AsRef<T> for Ordered<T> {
+    fn as_ref(&self) -> &T { &self.0 }
+}
+
+impl<T> AsMut<T> for Ordered<T> {
+    fn as_mut(&mut self) -> &mut T { &mut self.0 }
+}
+
 impl<T> Borrow<T> for Ordered<T> {
     fn borrow(&self) -> &T { &self.0 }
 }
