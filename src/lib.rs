@@ -82,6 +82,13 @@ impl<T> Ordered<T> {
     ///
     /// We also implement [`core::ops::Deref`] so this function is never explicitly needed.
     pub fn into_inner(self) -> T { self.0 }
+
+    /// Creates an `Ordered<T>` from a reference.
+    ///
+    /// This allows: `let found = map.get(Ordered::from_ref(&a));`
+    pub fn from_ref(value: &T) -> &Self {
+        unsafe { &*(value as *const _ as *const Self) }
+    }
 }
 
 impl<T: ArbitraryOrd> PartialOrd for Ordered<T> {
