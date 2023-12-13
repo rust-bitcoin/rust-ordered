@@ -173,4 +173,12 @@ mod tests {
 
         assert!(Ordered::from_ref(&a) < Ordered::from_ref(&b));
     }
+
+    #[test]
+    fn can_compare_with_reference() {
+        let a = Point::new(2, 3);
+        let b = Point::new(5, 7);
+
+        assert!(Ordered(&a) < Ordered(&b));
+    }
 }
