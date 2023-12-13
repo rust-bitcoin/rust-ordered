@@ -63,6 +63,7 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 /// println!("Or we can use borrow (&ordered): {}", &ordered);
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[repr(transparent)]
 pub struct Ordered<T>(pub T);
 
 impl<T: Copy> Copy for Ordered<T> {}
