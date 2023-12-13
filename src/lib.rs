@@ -133,3 +133,30 @@ impl<T> Deref for Ordered<T> {
 impl<T> DerefMut for Ordered<T> {
     fn deref_mut(&mut self) -> &mut T { &mut self.0 }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    struct Point {
+        x: u32,
+        y: u32,
+    }
+
+    impl Point {
+        fn new(x: u32, y: u32) -> Self { Point { x, y } }
+    }
+
+    impl ArbitraryOrd for Point {
+        fn arbitrary_cmp(&self, other: &Self) -> Ordering { (self.x, self.y).cmp(&(other.x, other.y)) }
+    }
+
+    #[test]
+    fn can_compare() {
+        let a = Point::new(2, 3);
+        let b = Point::new(5, 7);
+
+        assert!(Ordered(a) < Ordered(b));
+    }
+}
