@@ -54,7 +54,7 @@ Perhaps you would like to derive `Ord` on a complex type that contains a type th
 implement `Ord`.
 
 ```rust
-/// An example strcut that contains a `Foo`.
+/// An example struct that contains a `Foo` but derives `PartialOrd` and `Ord`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 struct Adt {
     x: u32,
