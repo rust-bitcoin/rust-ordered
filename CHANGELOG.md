@@ -1,3 +1,10 @@
+# 0.2.1 - 2023-12-15
+
+The repository was migrated to the `github.com/rust-bitocin` organization.
+This release is primarily done to fix the link on `crates.io`.
+
+- Update the `README.md` [#10](https://github.com/rust-bitcoin/rust-ordered/pull/10)
+
 # 0.2.0 - 2023-12-13
 
 - Add `AsRef`, `AsMut` imlps
