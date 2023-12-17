@@ -1,3 +1,7 @@
+# 0.2.2 - 2023-12-18
+
+Fix the repository link in the manifest [#12](https://github.com/rust-bitcoin/rust-ordered/pull/12)
+
 # 0.2.1 - 2023-12-15
 
 The repository was migrated to the `github.com/rust-bitocin` organization.
