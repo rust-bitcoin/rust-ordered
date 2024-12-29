@@ -1,3 +1,9 @@
+# 0.3.0 - 2024-12-30
+
+- Bump the MSRV to Rust `v1.63.0` [#17](https://github.com/rust-bitcoin/rust-ordered/pull/17)
+- Add default generic type to `ArbitraryOrd` for RHS [#27](https://github.com/rust-bitcoin/rust-ordered/pull/27)
+- Deprecate unneeded functions `as_inner` and `into_inner` [#28](https://github.com/rust-bitcoin/rust-ordered/pull/28)
+
 # 0.2.2 - 2023-12-18
 
 Fix the repository link in the manifest [#12](https://github.com/rust-bitcoin/rust-ordered/pull/12)
