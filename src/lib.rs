@@ -82,9 +82,9 @@ use core::ops::{Deref, DerefMut};
 ///     }
 /// }
 /// ```
-pub trait ArbitraryOrd: Eq + PartialEq {
+pub trait ArbitraryOrd<Rhs = Self>: Eq + PartialEq<Rhs> {
     /// Implements a meaningless, arbitrary ordering.
-    fn arbitrary_cmp(&self, other: &Self) -> Ordering;
+    fn arbitrary_cmp(&self, other: &Rhs) -> Ordering;
 }
 
 /// A wrapper type that implements `PartialOrd` and `Ord`.
