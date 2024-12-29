@@ -109,16 +109,6 @@ impl<T> Ordered<T> {
     /// This allows: `let found = map.get(Ordered::from_ref(&a));`
     #[allow(clippy::ptr_as_ptr)]
     pub fn from_ref(value: &T) -> &Self { unsafe { &*(value as *const _ as *const Self) } }
-
-    /// Returns a reference to the inner object.
-    ///
-    /// We also implement [`core::borrow::Borrow`] so this function is never explicitly needed.
-    pub const fn as_inner(&self) -> &T { &self.0 }
-
-    /// Returns the inner object.
-    ///
-    /// We also implement [`core::ops::Deref`] so this function is never explicitly needed.
-    pub fn into_inner(self) -> T { self.0 }
 }
 
 impl<T: ArbitraryOrd> ArbitraryOrd for &T {
