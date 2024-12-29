@@ -12,7 +12,7 @@
 //!
 //! ```
 //! # #![allow(unused)] // Because of `Adt`.
-//! use core::{cmp::Ordering, fmt};
+//! use core::cmp::Ordering;
 //! use ordered::{ArbitraryOrd, Ordered};
 //!
 //! /// A point in 2D space.
@@ -63,7 +63,7 @@ use core::ops::{Deref, DerefMut};
 ///
 /// ```
 /// # #![allow(unused)] // Because of `Adt`.
-/// use core::{cmp::Ordering, fmt};
+/// use core::cmp::Ordering;
 /// use ordered::{ArbitraryOrd, Ordered};
 ///
 /// /// A point in 2D space.
@@ -93,7 +93,7 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 ///
 /// ```
 /// # #![allow(unused)] // Because of `Adt`.
-/// use core::{cmp::Ordering, fmt};
+/// use core::cmp::Ordering;
 /// use ordered::{ArbitraryOrd, Ordered};
 ///
 /// /// A point in 2D space.
