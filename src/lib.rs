@@ -217,4 +217,26 @@ mod tests {
 
         assert!(Ordered(&a) < Ordered(&b));
     }
+
+    // Copied from https://rust-lang.github.io/api-guidelines/interoperability.html#c-send-sync
+    #[test]
+    fn send() {
+        #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+        struct Point {
+            x: u32,
+            y: u32,
+        }
+
+        impl ArbitraryOrd for Point {
+            fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+                (self.x, self.y).cmp(&(other.x, other.y))
+            }
+        }
+
+        fn assert_send<T: Send>() {}
+        fn assert_sync<T: Sync>() {}
+
+        assert_send::<Ordered<Point>>();
+        assert_sync::<Ordered<Point>>();
+    }
 }
