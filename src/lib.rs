@@ -10,6 +10,8 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 // Coding conventions.
 #![warn(missing_docs)]
+#![warn(deprecated_in_future)]
+#![doc(test(attr(warn(unused))))]
 
 use core::borrow::{Borrow, BorrowMut};
 use core::cmp::Ordering;
