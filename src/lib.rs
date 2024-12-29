@@ -87,15 +87,11 @@ impl<T> Ordered<T> {
     /// Creates an `Ordered<T>` from a reference.
     ///
     /// This allows: `let found = map.get(Ordered::from_ref(&a));`
-    pub fn from_ref(value: &T) -> &Self {
-        unsafe { &*(value as *const _ as *const Self) }
-    }
+    pub fn from_ref(value: &T) -> &Self { unsafe { &*(value as *const _ as *const Self) } }
 }
 
 impl<T: ArbitraryOrd> ArbitraryOrd for &T {
-    fn arbitrary_cmp(&self, other: &Self) -> Ordering {
-        (*self).arbitrary_cmp(other)
-    }
+    fn arbitrary_cmp(&self, other: &Self) -> Ordering { (*self).arbitrary_cmp(other) }
 }
 
 impl<T: ArbitraryOrd> PartialOrd for Ordered<T> {
@@ -155,7 +151,9 @@ mod tests {
     }
 
     impl ArbitraryOrd for Point {
-        fn arbitrary_cmp(&self, other: &Self) -> Ordering { (self.x, self.y).cmp(&(other.x, other.y)) }
+        fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+            (self.x, self.y).cmp(&(other.x, other.y))
+        }
     }
 
     #[test]
