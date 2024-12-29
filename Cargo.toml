@@ -11,7 +11,7 @@ keywords = ["ord", "partialord", "wrapper"]
 readme = "README.md"
 edition = "2021"
 rust-version = "1.63.0"
-exclude = ["justfile", "rustfmt.toml", "clippy.toml"]
+exclude = ["tests", "contrib"]
 
 [dependencies]
 
