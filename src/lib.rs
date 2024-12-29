@@ -111,6 +111,12 @@ impl<T> Ordered<T> {
     /// The inner type is public so this function is never explicitly needed.
     pub const fn new(inner: T) -> Self { Self(inner) }
 
+    /// Creates an `Ordered<T>` from a reference.
+    ///
+    /// This allows: `let found = map.get(Ordered::from_ref(&a));`
+    #[allow(clippy::ptr_as_ptr)]
+    pub fn from_ref(value: &T) -> &Self { unsafe { &*(value as *const _ as *const Self) } }
+
     /// Returns a reference to the inner object.
     ///
     /// We also implement [`core::borrow::Borrow`] so this function is never explicitly needed.
@@ -120,12 +126,6 @@ impl<T> Ordered<T> {
     ///
     /// We also implement [`core::ops::Deref`] so this function is never explicitly needed.
     pub fn into_inner(self) -> T { self.0 }
-
-    /// Creates an `Ordered<T>` from a reference.
-    ///
-    /// This allows: `let found = map.get(Ordered::from_ref(&a));`
-    #[allow(clippy::ptr_as_ptr)]
-    pub fn from_ref(value: &T) -> &Self { unsafe { &*(value as *const _ as *const Self) } }
 }
 
 impl<T: ArbitraryOrd> ArbitraryOrd for &T {
