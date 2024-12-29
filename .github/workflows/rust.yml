@@ -170,3 +170,18 @@ jobs:
         run: cp Cargo-${{ matrix.dep }}.lock Cargo.lock
       - name: "Run test script"
         run: ./maintainer-tools/ci/run_task.sh docsrs
+
+  Format:                       #  1 job, run cargo fmt directly.
+    name: Format - nightly toolchain
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v4
+      - name: "Select toolchain"
+        uses: dtolnay/rust-toolchain@nightly
+      - name: "Install rustfmt"
+        run: rustup component add rustfmt
+      - name: "Check formatting"
+        run: cargo +nightly fmt --all -- --check
