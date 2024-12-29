@@ -6,7 +6,7 @@
 //! `PartialOrd` and `Ord` are often useful and/or required. For example, [`Ordered`] allows one to
 //! use such a type as a key in a `BTreeMap` (which requires ordered keys).
 //!
-//! For a full example see `examples/point.rs`.
+//! For a full example see [`examples/point.rs`].
 //!
 //! # Examples
 //!
@@ -38,6 +38,8 @@
 //!     point: Ordered<Point>,
 //! }
 //! ```
+//!
+//! [`examples/point.rs`]: <https://github.com/rust-bitcoin/rust-ordered/blob/master/examples/point.rs>
 
 #![no_std]
 // Experimental features we need.
