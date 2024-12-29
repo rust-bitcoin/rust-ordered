@@ -17,7 +17,9 @@ fn main() {
 
     println!();
     println!("Looking in map for key: {}", a);
-    let found = map.get(Ordered::from_ref(&a)).expect("failed to look up key");
+    let found = map
+        .get(Ordered::from_ref(&a))
+        .expect("failed to look up key");
     println!("Found it, with value: {}", found);
 }
 
