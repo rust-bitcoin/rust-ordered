@@ -64,7 +64,7 @@ use core::ops::{Deref, DerefMut};
 /// ```
 /// # #![allow(unused)] // Because of `Adt`.
 /// use core::cmp::Ordering;
-/// use ordered::{ArbitraryOrd, Ordered};
+/// use ordered::ArbitraryOrd;
 ///
 /// /// A point in 2D space.
 /// ///
