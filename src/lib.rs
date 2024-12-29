@@ -3,7 +3,42 @@
 //! Provides a wrapper for types that can technically implement `PartialOrd`/`Ord`
 //! but for semantic reasons it is nonsensical.
 //!
-//! For examples see the docs on [`Ordered`] or the code in `examples/point.rs`.
+//! # Examples
+//!
+//! ```
+//! # #![allow(unused)] // Because of `Adt`.
+//! use core::{cmp::Ordering, fmt};
+//! use ordered::{ArbitraryOrd, Ordered};
+//!
+//! /// A point in 2D space.
+//! ///
+//! /// We do not want users to be able to write `a < b` because it is not well defined.
+//! #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+//! struct Point {
+//!     x: u32,
+//!     y: u32,
+//! }
+//!
+//! impl ArbitraryOrd for Point {
+//!     fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+//!         // Just use whatever order tuple cmp gives us.
+//!         (self.x, self.y).cmp(&(other.x, other.y))
+//!     }
+//! }
+//!
+//! impl fmt::Display for Point {
+//!     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+//!         write!(f, "({}, {})", self.x, self.y)
+//!     }
+//! }
+//!
+//! /// `Ordered` allows users to derive `PartialOrd` on types that include a `Point`.
+//! #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+//! struct Adt {
+//!     name: String,
+//!     point: Ordered<Point>,
+//! }
+//! ```
 
 #![no_std]
 // Experimental features we need.
@@ -32,6 +67,7 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 /// # Examples
 ///
 /// ```
+/// # #![allow(unused)] // Because of `Adt`.
 /// use core::{cmp::Ordering, fmt};
 /// use ordered::{ArbitraryOrd, Ordered};
 ///
@@ -60,9 +96,8 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 /// let point = Point { x: 0, y: 1 };
 /// let ordered = Ordered(point);
 ///
-/// println!("We can explicitly deref (*ordered): {}", *ordered);
-/// println!("Or use deref coercion (ordered): {}", ordered);
-/// println!("Or we can use borrow (&ordered): {}", &ordered);
+/// assert_eq!(*ordered, ordered.into_inner()); // Explicitly deref or use `into_inner()`.
+/// assert_eq!(&ordered.0, ordered.as_ref()); // Use `AsRef` or `as_ref()`.
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 #[repr(transparent)]
