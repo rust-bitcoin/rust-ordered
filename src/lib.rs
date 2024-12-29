@@ -124,6 +124,7 @@ impl<T> Ordered<T> {
     /// Creates an `Ordered<T>` from a reference.
     ///
     /// This allows: `let found = map.get(Ordered::from_ref(&a));`
+    #[allow(clippy::ptr_as_ptr)]
     pub fn from_ref(value: &T) -> &Self { unsafe { &*(value as *const _ as *const Self) } }
 }
 
