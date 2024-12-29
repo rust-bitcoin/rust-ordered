@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: CC0-1.0
 
-//! Provides a wrapper for types that can technically implement `PartialOrd`/`Ord`
-//! but for semantic reasons it is nonsensical.
+//! Provides a wrapper for types that can technically implement `PartialOrd`/`Ord` but for semantic
+//! reasons it is nonsensical.
+//!
+//! `PartialOrd` and `Ord` are often useful and/or required. For example, [`Ordered`] allows one to
+//! use such a type as a key in a `BTreeMap` (which requires ordered keys).
+//!
+//! For a full example see `examples/point.rs`.
 //!
 //! # Examples
 //!
@@ -23,12 +28,6 @@
 //!     fn arbitrary_cmp(&self, other: &Self) -> Ordering {
 //!         // Just use whatever order tuple cmp gives us.
 //!         (self.x, self.y).cmp(&(other.x, other.y))
-//!     }
-//! }
-//!
-//! impl fmt::Display for Point {
-//!     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-//!         write!(f, "({}, {})", self.x, self.y)
 //!     }
 //! }
 //!
@@ -87,17 +86,11 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 ///     }
 /// }
 ///
-/// impl fmt::Display for Point {
-///     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-///         write!(f, "({}, {})", self.x, self.y)
-///     }
-/// }
-///
 /// let point = Point { x: 0, y: 1 };
 /// let ordered = Ordered(point);
 ///
-/// assert_eq!(*ordered, ordered.into_inner()); // Explicitly deref or use `into_inner()`.
-/// assert_eq!(&ordered.0, ordered.as_ref()); // Use `AsRef` or `as_ref()`.
+/// assert_eq!(*ordered, point); // Use `ops::Deref`.
+/// assert_eq!(&ordered.0, ordered.as_ref()); // Use the public inner field or `AsRef`.
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 #[repr(transparent)]
