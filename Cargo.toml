@@ -13,9 +13,9 @@ edition = "2021"
 rust-version = "1.63.0"
 exclude = ["tests", "contrib"]
 
-[dependencies]
-
 [features]
+
+[dependencies]
 
 [[example]]
 name = "point"
