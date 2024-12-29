@@ -139,11 +139,13 @@ impl<T> Ordered<T> {
     /// Returns a reference to the inner object.
     ///
     /// We also implement [`core::borrow::Borrow`] so this function is never explicitly needed.
+    #[deprecated(since = "0.3.0", note = "use `ops::Deref` instead")]
     pub const fn as_inner(&self) -> &T { &self.0 }
 
     /// Returns the inner object.
     ///
     /// We also implement [`core::ops::Deref`] so this function is never explicitly needed.
+    #[deprecated(since = "0.3.0", note = "use `ops::Deref` instead")]
     pub fn into_inner(self) -> T { self.0 }
 }
 
