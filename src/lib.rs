@@ -6,13 +6,13 @@
 //! `PartialOrd` and `Ord` are often useful and/or required. For example, [`Ordered`] allows one to
 //! use such a type as a key in a `BTreeMap` (which requires ordered keys).
 //!
-//! For a full example see `examples/point.rs`.
+//! For a full example see [`examples/point.rs`].
 //!
 //! # Examples
 //!
 //! ```
 //! # #![allow(unused)] // Because of `Adt`.
-//! use core::{cmp::Ordering, fmt};
+//! use core::cmp::Ordering;
 //! use ordered::{ArbitraryOrd, Ordered};
 //!
 //! /// A point in 2D space.
@@ -38,6 +38,8 @@
 //!     point: Ordered<Point>,
 //! }
 //! ```
+//!
+//! [`examples/point.rs`]: <https://github.com/rust-bitcoin/rust-ordered/blob/master/examples/point.rs>
 
 #![no_std]
 // Experimental features we need.
@@ -56,6 +58,30 @@ use core::ops::{Deref, DerefMut};
 ///
 /// More specifically, this trait is for types that perform either a partial or
 /// total order but semantically it is nonsensical.
+///
+/// # Examples
+///
+/// ```
+/// # #![allow(unused)] // Because of `Adt`.
+/// use core::cmp::Ordering;
+/// use ordered::ArbitraryOrd;
+///
+/// /// A point in 2D space.
+/// ///
+/// /// We do not want users to be able to write `a < b` because it is not well defined.
+/// #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+/// struct Point {
+///     x: u32,
+///     y: u32,
+/// }
+///
+/// impl ArbitraryOrd for Point {
+///     fn arbitrary_cmp(&self, other: &Self) -> Ordering {
+///         // Just use whatever order tuple cmp gives us.
+///         (self.x, self.y).cmp(&(other.x, other.y))
+///     }
+/// }
+/// ```
 pub trait ArbitraryOrd: Eq + PartialEq {
     /// Implements a meaningless, arbitrary ordering.
     fn arbitrary_cmp(&self, other: &Self) -> Ordering;
@@ -67,7 +93,7 @@ pub trait ArbitraryOrd: Eq + PartialEq {
 ///
 /// ```
 /// # #![allow(unused)] // Because of `Adt`.
-/// use core::{cmp::Ordering, fmt};
+/// use core::cmp::Ordering;
 /// use ordered::{ArbitraryOrd, Ordered};
 ///
 /// /// A point in 2D space.
