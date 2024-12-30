@@ -1,3 +1,9 @@
+# 0.4.0 - 2024-12-31
+
+This release makes the `ArbitraryOrd` trait object safe.
+
+- Remove `Eq` trait bound [#31](https://github.com/rust-bitcoin/rust-ordered/pull/31)
+
 # 0.3.0 - 2024-12-30
 
 - Bump the MSRV to Rust `v1.63.0` [#17](https://github.com/rust-bitcoin/rust-ordered/pull/17)
