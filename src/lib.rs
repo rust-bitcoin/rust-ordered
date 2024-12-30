@@ -82,7 +82,7 @@ use core::ops::{Deref, DerefMut};
 ///     }
 /// }
 /// ```
-pub trait ArbitraryOrd<Rhs = Self>: Eq + PartialEq<Rhs> {
+pub trait ArbitraryOrd<Rhs = Self>: PartialEq<Rhs> {
     /// Implements a meaningless, arbitrary ordering.
     fn arbitrary_cmp(&self, other: &Rhs) -> Ordering;
 }
@@ -154,11 +154,11 @@ impl<T: ArbitraryOrd> ArbitraryOrd for &T {
 }
 
 impl<T: ArbitraryOrd> PartialOrd for Ordered<T> {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some((*self).arbitrary_cmp(other)) }
 }
 
-impl<T: ArbitraryOrd> Ord for Ordered<T> {
-    fn cmp(&self, other: &Self) -> Ordering { self.0.arbitrary_cmp(&other.0) }
+impl<T: ArbitraryOrd + Eq> Ord for Ordered<T> {
+    fn cmp(&self, other: &Self) -> Ordering { (*self).arbitrary_cmp(other) }
 }
 
 impl<T: fmt::Display> fmt::Display for Ordered<T> {
@@ -259,5 +259,18 @@ mod tests {
 
         assert_send::<Ordered<Point>>();
         assert_sync::<Ordered<Point>>();
+    }
+
+    #[test]
+    fn trait_is_object_safe() {
+        extern crate std;
+        use std::boxed::Box;
+
+        // If this test builds then `ArbitraryOrd` is object safe.
+        #[allow(dead_code)]
+        struct ObjectSafe {
+            p: Box<dyn ArbitraryOrd<Self>>,
+            q: Box<dyn PartialOrd<Self>>, // Sanity check.
+        }
     }
 }
