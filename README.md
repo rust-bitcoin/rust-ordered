@@ -68,16 +68,13 @@ let adt = Adt { x: 42, p: Foo::Space(50).into() };
 println!("We can explicitly deref: {}", *adt.p);
 println!("Or use deref coercion: {}", adt.p);
 println!("Or we can use borrow: {}", &adt.p);
-
-// And if all that is too complicated just use the inherent methods:
-
-println!("Explicitly get a reference: {}", adt.p.as_inner());
-println!("Or the inner type: {}", adt.p.into_inner());
 ```
 
 ## Minimum Supported Rust Version (MSRV)
 
-The crate MSRV is Rust v1.56.1
+This library should compile with any combination of features on **Rust 1.63.0**.
+
+Use `Cargo-minimal.lock` to build the MSRV by copying to `Cargo.lock` and building.
 
 ## Licensing
 
