@@ -68,11 +68,6 @@ let adt = Adt { x: 42, p: Foo::Space(50).into() };
 println!("We can explicitly deref: {}", *adt.p);
 println!("Or use deref coercion: {}", adt.p);
 println!("Or we can use borrow: {}", &adt.p);
-
-// And if all that is too complicated just use the inherent methods:
-
-println!("Explicitly get a reference: {}", adt.p.as_inner());
-println!("Or the inner type: {}", adt.p.into_inner());
 ```
 
 ## Minimum Supported Rust Version (MSRV)
