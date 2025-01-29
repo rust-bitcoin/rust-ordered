@@ -1,3 +1,9 @@
+# 1.0.0-alpha.0 - 2025-30-01
+
+Alpha 1.0 release - LFG!
+
+- No code changes since `0.4.0`, improvement to the README only [#33](https://github.com/rust-bitcoin/rust-ordered/issues/33).
+
 # 0.4.0 - 2024-12-31
 
 This release makes the `ArbitraryOrd` trait object safe.
