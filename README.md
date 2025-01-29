@@ -77,7 +77,9 @@ println!("Or the inner type: {}", adt.p.into_inner());
 
 ## Minimum Supported Rust Version (MSRV)
 
-The crate MSRV is Rust v1.56.1
+This library should compile with any combination of features on **Rust 1.63.0**.
+
+Use `Cargo-minimal.lock` to build the MSRV by copying to `Cargo.lock` and building.
 
 ## Licensing
 
