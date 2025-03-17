@@ -1,3 +1,5 @@
+[![Build](https://github.com/rust-bitcoin/rust-ordered/actions/workflows/rust.yml/badge.svg)](https://github.com/rust-bitcoin/rust-ordered/actions)
+
 Arbitrary Ordering
 ==================
 
